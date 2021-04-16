@@ -1,0 +1,76 @@
+﻿@using Ejercicio_POO.Models.Entities
+@model IEnumerable<Ejercicio_POO.Models.Entities.Transporte>
+@{
+    ViewBag.Title = "Transportes";
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-primary alert-dismissable mb-2 text-center fade show" role="alert">
+        <button type="button" class="close mb-4" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p>@ViewBag.Mensaje</p>
+    </div>
+}
+
+<div class="row mb-1">
+    <h3 class="mx-auto mb-4">Aviónes</h3>
+    <table class="table table-striped table-bordered table-sm table-hover text-center">
+        <thead>
+            <tr>
+                <th>Avión</th>
+                <th>@Html.DisplayNameFor(model => model.Pasajeros)</th>
+                <th>@Html.DisplayNameFor(model => model.Capacidad)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (item.GetType().Equals(typeof(Avion)))
+                {
+                    <tr>
+                        <td>#@item.Id</td>
+                        <td>@item.Pasajeros</td>
+                        <td>@item.Capacidad</td>
+                        <td>
+                            @Html.ActionLink("Avanzar", "Avanzar", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-success" })
+                            @Html.ActionLink("Detener", "Detener", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-danger" })
+                            @Html.ActionLink("Despegar", "Despegar", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-warning" })
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="row mb-1">
+    <h3 class="mx-auto mb-4">Automóviles</h3>
+    <table class="table table-striped table-bordered table-sm table-hover text-center">
+        <thead>
+            <tr>
+                <th>Automóvil</th>
+                <th>@Html.DisplayNameFor(model => model.Pasajeros)</th>
+                <th>@Html.DisplayNameFor(model => model.Capacidad)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (item.GetType().Equals(typeof(Automovil)))
+                {
+                    <tr>
+                        <td>#@(item.Id - 5)</td>
+                        <td>@item.Pasajeros</td>
+                        <td>@item.Capacidad</td>
+                        <td>
+                            @Html.ActionLink("Avanzar", "Avanzar", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-success" })
+                            @Html.ActionLink("Detener", "Detener", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-danger" })
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
