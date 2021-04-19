@@ -35,8 +35,41 @@ namespace DivisionConsola
 
             try
             {
-                Console.Write("2) División - 3 / 0: ");
+                Console.Write("2) División -> 3 / 0: ");
                 var resultado = divisionServicio.Divide(3, 0);
+                Console.Write(resultado);
+                Console.WriteLine(Environment.NewLine);
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine($"Mensaje: {ex.Message}");
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine($"Mensaje: {ex.Message}");
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
+            }
+            finally
+            {
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine("Fin del metodo 'Divide'.");
+            }
+
+            Console.ReadKey();
+            Console.Clear();
+
+            Console.WriteLine("Ahora veremos que pasa si queremos dividir valores no numericos...");
+            Console.WriteLine(Environment.NewLine);
+
+            try
+            {
+                Console.Write("2) División -> 3 / null: ");
+                var resultado = divisionServicio.Divide(3, null);
                 Console.Write(resultado);
                 Console.WriteLine(Environment.NewLine);
             }
