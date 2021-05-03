@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Products Querys";
+}
+
+<div class="jumbotron">
+    <h1 style="margin: 3rem;">@ViewBag.Title</h1>
+
+    <ul>
+        <li><h4>@Html.ActionLink("List out of stock products", "GetOutOfStock")</h4></li>
+        <li><h4>@Html.ActionLink("List in stock products with price greater than $3", "GetProductsInStockPriceHigherThan", new { price = 3m })</h4></li>
+        <li><h4>@Html.ActionLink("Get product with ProductID = 789 or null by default", "GetProduct", new { id = 789 })</h4></li>
+        <li><h4>@Html.ActionLink("List products by name", "GetProductsOrderByName")</h4></li>
+        <li><h4>@Html.ActionLink("List products by stock (descending)", "GetProductsOrderByStockDesc")</h4></li>
+        <li><h4>@Html.ActionLink("List products with asociated categories", "GetProductsWithCategories")</h4></li>
+        <li><h4>@Html.ActionLink("Get first product", "GetFirstProduct")</h4></li>
+    </ul>
+
+</div>

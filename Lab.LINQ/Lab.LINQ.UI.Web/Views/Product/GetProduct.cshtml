@@ -1,0 +1,65 @@
+﻿@model Lab.LINQ.Entities.Product
+
+@{
+    ViewBag.Title = "Get Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center" style="margin: 4rem;">Get Product</h2>
+
+@if (Model == null)
+{
+    <h4 class="text-center">No se encontro el producto indicado.</h4>
+}
+else
+{
+    <div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </dt>
+
+            <dd>
+                $@Html.DisplayFor(model => model.UnitPrice)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnitsInStock)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnitsInStock)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Discontinued)
+            </dt>
+
+            <dd>
+                @if (Model.Discontinued)
+                {
+                    <span>Yes</span>
+                }
+                else
+                {
+                    <span>No</span>
+                }
+            </dd>
+
+        </dl>
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Back to querys", "Index")
+</p>

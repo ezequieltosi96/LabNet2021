@@ -1,0 +1,43 @@
+﻿
+@model IEnumerable<Lab.LINQ.UI.Web.Models.Customer.CustomerWithOrderQttyViewModel>
+
+@{
+    ViewBag.Title = "Get Customers With Orders Qtty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Get Customers With Orders Quantity</h2>
+
+<table class="table table-striped table-hover text-center">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.ContactName)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.OrdersQty)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrdersQty)
+            </td>
+            <td>
+                @Html.ActionLink("Customer Details", "GetCustomer", new { id = item.CustomerID })
+            </td>
+        </tr>
+    }
+
+</table>

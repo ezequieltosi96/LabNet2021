@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Customers Querys";
+}
+
+<div class="jumbotron">
+    <h1 style="margin: 3rem;">@ViewBag.Title</h1>
+
+    <ul>
+        <li><h4>@Html.ActionLink("List WA customers", "GetWashingtonCustomers")</h4></li>
+        <li><h4>@Html.ActionLink("List customers names uppercase", "GetCustomersNamesUpper")</h4></li>
+        <li><h4>@Html.ActionLink("List customers names lowercase", "GetCustomersNamesLower")</h4></li>
+        <li><h4>@Html.ActionLink("List WA customers with order date greater than 01/01/1997", "GetWashingtonCustomersWithOrderDateGreaterThan")</h4></li>
+        <li><h4>@Html.ActionLink("List first 3 WA customers", "GetFirstThreeWashingtonCustomers")</h4></li>
+        <li><h4>@Html.ActionLink("List customers with orders quantity", "GetCustomersWithOrdersQtty")</h4></li>
+    </ul>
+
+</div>
+
