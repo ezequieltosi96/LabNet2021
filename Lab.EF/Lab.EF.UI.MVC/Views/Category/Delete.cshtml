@@ -1,0 +1,20 @@
+﻿@model Lab.EF.UI.MVC.Models.Category.CategoryViewModel
+
+@{
+    Layout = null;
+}
+
+
+
+@using (Html.BeginForm("Delete", "Category", FormMethod.Post, new { onSubmit = "return ajaxPost(this)", autocomplete = "off", @class="text-center" }))
+{
+<div class="form-horizontal">
+    <h4>Are you sure you want to delete @Model.Name</h4>
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Name)
+
+    <div class="form-group">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+    </div>
+</div>
+}

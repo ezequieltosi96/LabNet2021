@@ -3,12 +3,11 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
+@{
+    Layout = null;
+}
 
 <div>
-    <h4>CategoryViewModel</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -28,7 +27,3 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "CreateOrEdit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

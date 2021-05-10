@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Lab.EF.Entities;
 using Lab.EF.Logic.Category;
+using Lab.EF.UI.MVC.Helpers;
 using Lab.EF.UI.MVC.Models.Category;
 
 namespace Lab.EF.UI.MVC.Controllers
@@ -16,15 +18,20 @@ namespace Lab.EF.UI.MVC.Controllers
             _categoryLogic = new CategoryLogic();
         }
 
-        public ActionResult Index()
+        private IEnumerable<CategoryViewModel> GetAllViewModels()
         {
-            var categoryModels = _categoryLogic.GetAll()
+            return _categoryLogic.GetAll()
                 .Select(c => new CategoryViewModel()
                 {
                     Id = c.CategoryID,
                     Name = c.CategoryName,
                     Description = c.Description
-                });
+                }).ToList();
+        }
+
+        public ActionResult Index()
+        {
+            var categoryModels = this.GetAllViewModels();
 
             return View(categoryModels);
         }
@@ -117,11 +124,21 @@ namespace Lab.EF.UI.MVC.Controllers
                     });
                 }
 
-                return RedirectToAction("Index");
+                return Json(new
+                {
+                    isValid = true,
+                    html = RazorToString.RenderRazorViewToString(ControllerContext, "~/Views/Category/_ListAll.cshtml",
+                       this.GetAllViewModels(), true)
+                });
             }
             catch (Exception)
             {
-                return View(vm);
+                return Json(new
+                {
+                    isValid = true,
+                    html = RazorToString.RenderRazorViewToString(ControllerContext, "~/Views/Category/CreateOrEdit.cshtml",
+                        vm, false)
+                });
             }
         }
 
@@ -129,13 +146,47 @@ namespace Lab.EF.UI.MVC.Controllers
         {
             try
             {
-                _categoryLogic.Delete(id);
+                var category = _categoryLogic.Get(id);
 
-                return RedirectToAction("Index");
+                if (category == null) return View("Error");
+
+                var model = new CategoryViewModel()
+                {
+                    Id = category.CategoryID,
+                    Name = category.CategoryName,
+                    Description = category.Description
+                };
+
+                return View(model);
             }
             catch (Exception)
             {
                 return View("Error");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(CategoryViewModel vm)
+        {
+            try
+            {
+                _categoryLogic.Delete(vm.Id);
+
+                return Json(new
+                {
+                    isValid = true,
+                    html = RazorToString.RenderRazorViewToString(ControllerContext, "~/Views/Category/_ListAll.cshtml",
+                        this.GetAllViewModels(), true)
+                });
+            }
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    isValid = true,
+                    html = RazorToString.RenderRazorViewToString(ControllerContext, "~/Views/Category/_ListAll.cshtml",
+                        this.GetAllViewModels(), true)
+                });
             }
         }
     }

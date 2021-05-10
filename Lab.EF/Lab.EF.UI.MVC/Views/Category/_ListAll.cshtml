@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Lab.EF.UI.MVC.Models.Category.CategoryViewModel>
+
+<h2 class="text-center">Categories AJAX</h2>
+
+<div style="padding: 2rem;">
+    <a class="btn btn-primary pull-right" onclick="showInModal('@Url.Action("CreateOrEdit", "Category")', 'New Category')"><span class="glyphicon glyphicon-plus"></span> New category</a>
+</div>
+
+<table class="table table-responsive table-striped text-center">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>
+                    @category.Name
+                </td>
+                <td>
+                    @category.Description
+                </td>
+                <td>
+                    <a class="btn-sm btn-info" onclick="showInModal('@Url.Action("Details", "Category", new{id = category.Id})', 'Category Detail')"><span class="glyphicon glyphicon-zoom-in"></span></a>
+                    <a class="btn-sm btn-success" onclick="showInModal('@Url.Action("CreateOrEdit", "Category", new{id = category.Id})', 'Edit Category')"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="btn-sm btn-warning" onclick="showInModal('@Url.Action("Delete", "Category", new {id = category.Id})', 'Delete Category')"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

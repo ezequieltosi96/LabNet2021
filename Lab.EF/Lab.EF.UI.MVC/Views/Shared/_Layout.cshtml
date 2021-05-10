@@ -22,8 +22,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Categories", "Index", "Category")</li>
-                    <li>@Html.ActionLink("Suppliers", "Index", "Supplier")</li>
+                    <li>@Html.ActionLink("Categories (using ajax)", "Index", "Category")</li>
+                    <li>@Html.ActionLink("Suppliers (with postbacks)", "Index", "Supplier")</li>
                 </ul>
             </div>
         </div>
@@ -38,6 +38,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/script")
     @RenderSection("scripts", required: false)
 </body>
 </html>
