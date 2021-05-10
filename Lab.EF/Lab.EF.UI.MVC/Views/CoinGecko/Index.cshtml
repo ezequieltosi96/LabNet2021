@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Lab.EF.UI.MVC.Models.Coin.CoinViewModel>
+@{
+    ViewBag.Title = "CoinGecko API";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">CoinGecko API - The world's most comprehensive cryptocurrency API </h1>
+<h3 class="text-center"><a href="https://www.coingecko.com/es/api">https://www.coingecko.com/es/api</a></h3>
+
+@if (ViewBag.Error == "")
+{
+    @Html.Partial("_AllCoins", Model)
+}
+else
+{
+    <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+}

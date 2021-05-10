@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Lab.EF.UI.MVC.Models.Coin.CoinViewModel>
+
+<h2 class="text-center">Top 10 Cryptocurrencies</h2>
+
+<table class="table table-responsive table-striped table-hover text-center">
+    <thead>
+        <tr>
+            <th></th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Symbol)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Current_Price)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Ath)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Atl)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var coin in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@coin.Image" width="30" height="30" />
+                </td>
+                <td>
+                    @coin.Name
+                </td>
+                <td>
+                    @coin.Symbol.ToUpper()
+                </td>
+                <td>
+                    $@coin.Current_Price
+                </td>
+                <td>
+                    $@coin.Ath
+                </td>
+                <td>
+                    $@coin.Atl
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
