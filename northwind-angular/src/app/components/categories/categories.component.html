@@ -1,0 +1,34 @@
+<h1 class="text-center">Categories</h1>
+
+<div class="d-flex justify-content-end align-items-center">
+    <form class="search-form" [formGroup]="searchForm" autocomplete="off">
+        <input formControlName="searchString" type="text" class="form-control" placeholder="Search For Category..." />
+    </form>
+    <a class="btn btn-success m-2" routerLink="/form">Add New</a>
+</div>
+
+<table class="table table-striped table-hover text-center">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of categories$ | async; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+                {{ category.Name }}
+            </td>
+            <td>
+                {{ category.Description }}
+            </td>
+            <td>
+                <a class="btn btn-sm btn-primary mx-2" [routerLink]="['/form', category.Id]">Edit</a>
+                <a class="btn btn-sm btn-danger mx-2" (click)="handleDelete(category.Id, category.Name)">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
