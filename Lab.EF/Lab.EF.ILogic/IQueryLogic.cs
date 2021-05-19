@@ -6,6 +6,6 @@ namespace Lab.EF.ILogic
     {
         T Get(int id);
 
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(string searchString = "");
     }
 }

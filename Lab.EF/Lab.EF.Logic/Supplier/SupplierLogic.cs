@@ -53,9 +53,9 @@ namespace Lab.EF.Logic.Supplier
             return supplier;
         }
 
-        public IEnumerable<Entities.Supplier> GetAll()
+        public IEnumerable<Entities.Supplier> GetAll(string searchString = "")
         {
-            var suppliers = Context.Suppliers.ToList();
+            var suppliers = Context.Suppliers.Where(s => s.ContactName.Contains(searchString)).ToList();
 
             return suppliers;
         }

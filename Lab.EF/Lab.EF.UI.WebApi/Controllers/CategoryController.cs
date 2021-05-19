@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Mvc;
 using Lab.EF.Entities;
 using Lab.EF.Logic.Category;
@@ -11,6 +12,7 @@ using Lab.EF.UI.WebApi.Models.Category;
 
 namespace Lab.EF.UI.WebApi.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class CategoryController : ApiController
     {
         private readonly CategoryLogic _categoryLogic;
@@ -20,9 +22,10 @@ namespace Lab.EF.UI.WebApi.Controllers
             _categoryLogic = new CategoryLogic();
         }
 
-        public IEnumerable<CategoryViewModel> Get()
+        public IEnumerable<CategoryViewModel> Get(string searchString = "")
         {
-            var categories = _categoryLogic.GetAll().Select(c => new CategoryViewModel()
+            if (searchString == null) searchString = "";
+            var categories = _categoryLogic.GetAll(searchString).Select(c => new CategoryViewModel()
             {
                 Id = c.CategoryID,
                 Name = c.CategoryName,
@@ -63,7 +66,7 @@ namespace Lab.EF.UI.WebApi.Controllers
                     Description = vm.Description
                 });
 
-                return Ok();
+                return Ok(vm);
             }
             catch (Exception e)
             {
@@ -87,7 +90,7 @@ namespace Lab.EF.UI.WebApi.Controllers
                     Description = vm.Description
                 });
 
-                return Ok();
+                return Ok(vm);
             }
             catch (Exception e)
             {
@@ -105,7 +108,7 @@ namespace Lab.EF.UI.WebApi.Controllers
 
                 _categoryLogic.Delete(id);
 
-                return Ok();
+                return Ok(id);
             }
             catch (Exception e)
             {

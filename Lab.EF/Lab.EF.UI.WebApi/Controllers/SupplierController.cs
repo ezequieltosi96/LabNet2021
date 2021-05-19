@@ -19,9 +19,9 @@ namespace Lab.EF.UI.WebApi.Controllers
             _supplierLogic = new SupplierLogic();
         }
 
-        public IEnumerable<SupplierViewModel> Get()
+        public IEnumerable<SupplierViewModel> Get(string searchString = "")
         {
-            var suppliers = _supplierLogic.GetAll().Select(s => new SupplierViewModel()
+            var suppliers = _supplierLogic.GetAll(searchString).Select(s => new SupplierViewModel()
             {
                 Id = s.SupplierID,
                 Address = s.Address,

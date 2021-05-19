@@ -45,9 +45,9 @@ namespace Lab.EF.Logic.Category
             return category;
         }
 
-        public IEnumerable<Entities.Category> GetAll()
+        public IEnumerable<Entities.Category> GetAll(string searchString = "")
         {
-            var categories = Context.Categories.ToList();
+            var categories = Context.Categories.Where(c => c.CategoryName.Contains(searchString)).ToList();
 
             return categories;
         }
